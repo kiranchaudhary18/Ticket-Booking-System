@@ -1,0 +1,727 @@
+"use client";
+
+import React, { useEffect, useRef, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
+import { UserRole } from "@/types/auth";
+import { Booking } from "@/types/booking";
+import { bookingService } from "@/services/booking.service";
+import { paymentService } from "@/services/payment.service";
+import {
+  openRazorpayCheckout,
+  resolveRazorpayKey,
+  RazorpayCheckoutError,
+} from "@/lib/razorpay";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ErrorState } from "@/components/ui/error-state";
+import {
+  ArrowLeft,
+  Calendar,
+  CheckCircle2,
+  Clock,
+  CreditCard,
+  Info,
+  Loader2,
+  MapPin,
+  ShieldCheck,
+  Ticket,
+} from "lucide-react";
+
+const STATUS_VARIANTS: Record<
+  string,
+  "default" | "secondary" | "destructive" | "outline"
+> = {
+  CONFIRMED: "default",
+  PENDING: "secondary",
+  CANCELLED: "destructive",
+  REFUNDED: "outline",
+};
+
+const STATUS_LABELS: Record<string, string> = {
+  CONFIRMED: "Confirmed",
+  PENDING: "Pending",
+  CANCELLED: "Cancelled",
+  REFUNDED: "Refunded",
+};
+
+const SEAT_TYPE_LABELS: Record<string, string> = {
+  REGULAR: "Regular",
+  PREMIUM: "Premium",
+  VIP: "VIP",
+};
+
+type PayPhase = "idle" | "creating" | "checkout" | "verifying";
+
+interface PaymentErrorInfo {
+  title: string;
+  message: string;
+  action: "login" | "reload" | "my-bookings" | null;
+  /** Whether the user can safely retry the payment (default: false). */
+  retry?: boolean;
+}
+
+/**
+ * Map any payment-flow failure to a friendly, user-facing message.
+ * Server (DRF) error bodies are read ONLY to classify the failure —
+ * raw Django/server text is never shown to the user.
+ */
+function describePaymentError(error: unknown): PaymentErrorInfo {
+  // Errors raised by the Razorpay Checkout integration itself.
+  if (error instanceof RazorpayCheckoutError) {
+    if (error.kind === "cancelled") {
+      return {
+        title: "Payment Cancelled",
+        message:
+          "Payment was cancelled before it could be completed. Your booking is still pending — you can pay whenever you are ready.",
+        action: null,
+        retry: true,
+      };
+    }
+
+    if (error.kind === "failed") {
+      // Classify the raw gateway reason (never rendered) to tailor the message.
+      const gatewayDetail = `${error.gatewayCode ?? ""} ${
+        error.gatewayDescription ?? ""
+      }`.toLowerCase();
+      const declined =
+        /declin|card|bank|issuer|insufficient|authentication|otp|netbanking|upi/.test(
+          gatewayDetail
+        );
+
+      return {
+        title: "Payment Failed",
+        message: declined
+          ? "Your bank declined the payment or it could not be processed. No amount has been deducted — if your bank placed a temporary hold, it will be released automatically. Please try again or use a different payment method."
+          : "The payment could not be completed and no amount has been deducted. Your booking is still pending — please try again.",
+        action: null,
+        retry: true,
+      };
+    }
+
+    return {
+      title: "Payment Gateway Unavailable",
+      message:
+        "We could not load the payment gateway. Please check your internet connection and try again.",
+      action: null,
+      retry: true,
+    };
+  }
+
+
+  const err = error as {
+    response?: { status?: number; data?: unknown };
+    message?: string;
+  };
+
+  // No server response — network failure.
+  if (!err?.response) {
+    return {
+      title: "Connection Error",
+      message:
+        "We could not reach the server. Please check your internet connection and try again.",
+      action: null,
+      retry: true,
+    };
+  }
+
+  const status = err.response.status;
+  // Flatten the server payload for classification only.
+  const toText = (value: unknown): string => {
+    if (Array.isArray(value)) return value.map(toText).join(" ");
+    if (value && typeof value === "object") {
+      return Object.values(value).map(toText).join(" ");
+    }
+    return value == null ? "" : String(value);
+  };
+  const text = toText(err.response.data).toLowerCase();
+
+  if (status === 401) {
+    return {
+      title: "Session Expired",
+      message:
+        "Your session has expired. Please sign in again to complete your payment.",
+      action: "login",
+    };
+  }
+
+  if (status === 403) {
+    return {
+      title: "Access Denied",
+      message:
+        "You do not have permission to pay for this booking. Please sign in with the account used to make the booking.",
+      action: "my-bookings",
+    };
+  }
+
+  if (status === 400 || status === 404 || status === 422) {
+    // Booking already processed — payment state moved on elsewhere (e.g. webhook).
+    if (/already|confirmed|not pending|cancelled/i.test(text)) {
+      return {
+        title: "Booking Already Processed",
+        message:
+          "This booking has already been processed and no further payment is needed. Check My Bookings for its current status.",
+        action: "my-bookings",
+      };
+    }
+
+    // Signature/verification problem — payment may still have gone through.
+    if (/signature|verify|payment_id/i.test(text)) {
+      return {
+        title: "Payment Verification Failed",
+        message:
+          "We could not verify your payment. If your bank account was charged, do not worry — check My Bookings, as your booking may already be confirmed. Otherwise, you can try paying again.",
+        action: "my-bookings",
+      };
+    }
+
+    // Gateway/order issue on the Backend (e.g. Razorpay API failure).
+    if (/razorpay|gateway|order|key/i.test(text)) {
+      return {
+        title: "Payment Gateway Error",
+        message:
+          "The payment gateway reported a problem while creating your order. Your booking is still pending — please try again in a few moments.",
+        action: null,
+        retry: true,
+      };
+    }
+
+    return {
+      title: "Payment Failed",
+      message:
+        "We could not complete your payment. Your booking remains pending — please try again.",
+      action: null,
+      retry: true,
+    };
+  }
+
+  return {
+    title: "Something Went Wrong",
+    message:
+      "We could not complete your payment. Your booking remains pending — please try again.",
+    action: null,
+    retry: true,
+  };
+}
+
+export default function PaymentPage() {
+  const params = useParams();
+  const router = useRouter();
+  const { isAuthenticated, isLoading: authLoading, user } = useAuth();
+
+  // The Backend accepts either the numeric booking id or the
+  // booking reference, so the route param works for both.
+  const bookingId = params.bookingId as string;
+
+  const [booking, setBooking] = useState<Booking | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  const [payPhase, setPayPhase] = useState<PayPhase>("idle");
+  const [paymentError, setPaymentError] = useState<PaymentErrorInfo | null>(null);
+  const [ticketNumber, setTicketNumber] = useState<string | null>(null);
+
+  // Synchronous re-entrancy lock for the payment flow. State updates are
+  // async, so this ref guarantees no duplicate payment request or repeated
+  // order creation even when a second click lands before React re-renders.
+  const payLockRef = useRef(false);
+
+  useEffect(() => {
+    // Auth redirect — preserve the payment URL so the user returns here
+    // after logging in.
+    if (!authLoading && !isAuthenticated) {
+      router.push(
+        `/login?redirect=${encodeURIComponent(`/booking/${bookingId}/payment`)}`
+      );
+      return;
+    }
+
+    if (authLoading || !isAuthenticated) return;
+
+    // Only CUSTOMERs can pay for bookings.
+    if (user && user.role !== UserRole.CUSTOMER) {
+      router.replace(
+        user.role === UserRole.ADMIN ? "/admin/dashboard" : "/organizer/dashboard"
+      );
+      return;
+    }
+
+    const fetchBooking = async () => {
+      try {
+        setIsLoading(true);
+        setLoadError(null);
+        const data = await bookingService.getBookingDetails(bookingId);
+        setBooking(data);
+      } catch (err) {
+        console.error("Failed to load booking:", err);
+        setLoadError(
+          "We could not find this booking. It may not exist, or you may not have access to it."
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchBooking();
+  }, [bookingId, isAuthenticated, authLoading, user, router]);
+
+  const handlePayNow = async () => {
+    if (!booking || booking.status !== "PENDING") return;
+
+    if (payLockRef.current || payPhase !== "idle") return;
+    payLockRef.current = true;
+
+    setPaymentError(null);
+    setPayPhase("creating");
+
+    try {
+      // 1. Ask the Backend to create the Razorpay order.
+      const order = await paymentService.createOrder(booking.id);
+
+      // 2. Open Razorpay Standard Checkout with the PUBLIC key.
+      const key = resolveRazorpayKey(order.key_id);
+      if (!key) {
+        throw new RazorpayCheckoutError(
+          "unavailable",
+          "Payment is not configured yet. Please try again later."
+        );
+      }
+
+      setPayPhase("checkout");
+      const result = await openRazorpayCheckout({
+        key,
+        order_id: order.order_id,
+        amount: order.amount,
+        currency: order.currency,
+        name: booking.event.title,
+        description: `Booking ${booking.booking_reference}`,
+        prefill: {
+          name: user?.name,
+          email: user?.email,
+        },
+        theme: { color: "#7C3AED" },
+      });
+
+      // 3. Let the Backend verify the signature, confirm the booking
+      //    and issue the ticket.
+      setPayPhase("verifying");
+      const verification = await paymentService.verifyPayment({
+        booking_id: booking.id,
+        razorpay_order_id: result.razorpay_order_id,
+        razorpay_payment_id: result.razorpay_payment_id,
+        razorpay_signature: result.razorpay_signature,
+      });
+
+      // 4. Success ONLY after the Backend verified the signature, marked the
+      //    payment SUCCESS, and confirmed the booking. The frontend never
+      //    decides payment success on its own — use the Backend's returned
+      //    status, then re-fetch the booking so the UI shows server state.
+      const nextStatus = verification.booking_status || "CONFIRMED";
+      setTicketNumber(verification.ticket_number ?? null);
+      setBooking((prev) => (prev ? { ...prev, status: nextStatus } : prev));
+
+      // Authoritative refresh — the success panel renders from the
+      // server-confirmed booking, not from a frontend assumption.
+      try {
+        const fresh = await bookingService.getBookingDetails(
+          booking.booking_reference
+        );
+        setBooking(fresh);
+      } catch (refreshErr) {
+        // Verification already succeeded; keep the verify-based state.
+        console.error("Failed to refresh booking after payment:", refreshErr);
+      }
+    } catch (err) {
+      console.error("Payment failed:", err);
+      setPaymentError(describePaymentError(err));
+    } finally {
+      payLockRef.current = false;
+      setPayPhase("idle");
+    }
+  };
+
+  const formatDate = (dateStr: string) =>
+    new Intl.DateTimeFormat("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    }).format(new Date(dateStr));
+
+  const formatTime = (timeStr: string) => timeStr.slice(0, 5);
+
+  if (authLoading || isLoading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh]">
+        <Loader2 className="h-10 w-10 animate-spin text-primary/60 mb-4" />
+        <p className="text-muted-foreground">Loading payment details...</p>
+      </div>
+    );
+  }
+
+  if (loadError || !booking) {
+    return (
+      <div className="pt-20">
+        <ErrorState
+          title="Booking Not Found"
+          message={loadError ?? "We could not find this booking."}
+          onRetry={() => window.location.reload()}
+        />
+        <div className="flex justify-center gap-4 mt-4 mb-20">
+          <Button onClick={() => router.push("/customer/bookings")} variant="outline">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            View My Bookings
+          </Button>
+          <Button onClick={() => router.push("/events")} variant="ghost">
+            Back to Events
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  const totalAmount = parseFloat(booking.total_amount).toFixed(2);
+  const isPending = booking.status === "PENDING";
+  const isPaying = payPhase !== "idle";
+
+  const payButtonLabel = () => {
+    switch (payPhase) {
+      case "creating":
+        return "Processing...";
+      case "checkout":
+        return "Waiting for Payment...";
+      case "verifying":
+        return "Verifying Payment...";
+      default:
+        return `Pay ₹${totalAmount}`;
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-background pb-20">
+      {/* Header */}
+      <div className="bg-muted py-6 border-b">
+        <div className="container mx-auto px-4 md:px-6">
+          <h1 className="text-3xl font-bold tracking-tight mb-2">Complete Payment</h1>
+          <p className="text-muted-foreground text-lg">
+            Confirm your seats by completing the secure payment.
+          </p>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 pt-8 max-w-3xl">
+        <button
+          onClick={() => router.push("/customer/bookings")}
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to My Bookings
+        </button>
+
+        {/* Booking details */}
+        <div className="bg-card rounded-2xl border border-border shadow-sm p-6 md:p-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+            <div className="min-w-0">
+              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">
+                Event
+              </p>
+              <h2 className="text-xl md:text-2xl font-bold tracking-tight">
+                {booking.event.title}
+              </h2>
+            </div>
+            <Badge
+              variant={STATUS_VARIANTS[booking.status] || "secondary"}
+              className="self-start shrink-0"
+            >
+              {STATUS_LABELS[booking.status] || booking.status}
+            </Badge>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+            <div>
+              <p className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-muted-foreground mb-1.5">
+                <Calendar className="h-3.5 w-3.5 text-accent" />
+                Show Date
+              </p>
+              <p className="font-medium">{formatDate(booking.show.show_date)}</p>
+            </div>
+
+            <div>
+              <p className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-muted-foreground mb-1.5">
+                <Clock className="h-3.5 w-3.5 text-accent" />
+                Show Time
+              </p>
+              <p className="font-medium">
+                {formatTime(booking.show.start_time)} –{" "}
+                {formatTime(booking.show.end_time)}
+              </p>
+            </div>
+
+            <div className="sm:col-span-2">
+              <p className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-muted-foreground mb-1.5">
+                <MapPin className="h-3.5 w-3.5 text-accent" />
+                Venue
+              </p>
+              <p className="font-medium">
+                {booking.venue.name}
+                <span className="text-muted-foreground">
+                  {" "}
+                  · {booking.venue.city}, {booking.venue.state}
+                </span>
+              </p>
+            </div>
+
+            <div className="sm:col-span-2">
+              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1.5">
+                Booking ID
+              </p>
+              <p className="font-mono font-semibold">{booking.booking_reference}</p>
+            </div>
+
+            <div className="sm:col-span-2">
+              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">
+                Selected Seats ({booking.seats.length})
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {booking.seats.map((item) => (
+                  <span
+                    key={item.id}
+                    className="inline-flex items-baseline gap-1.5 rounded-lg border border-border bg-muted/50 px-3 py-1.5 text-sm"
+                  >
+                    <span className="font-semibold">
+                      {item.seat.row}
+                      {item.seat.seat_number}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {SEAT_TYPE_LABELS[item.seat.seat_type] ?? item.seat.seat_type}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      ₹{parseFloat(item.price).toFixed(2)}
+                    </span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-border mt-6 pt-5 flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">
+              Total Amount ({booking.seats.length}{" "}
+              {booking.seats.length === 1 ? "ticket" : "tickets"})
+            </p>
+            <p className="text-2xl md:text-3xl font-bold text-accent">
+              ₹{totalAmount}
+            </p>
+          </div>
+        </div>
+
+        {/* Already confirmed — no payment needed */}
+        {!isPending && !ticketNumber && booking.status === "CONFIRMED" && (
+          <div className="bg-success/10 border border-success/20 rounded-2xl p-6 mt-6 flex items-start gap-4">
+            <div className="bg-success/15 p-3 rounded-full shrink-0">
+              <CheckCircle2 className="h-6 w-6 text-success" />
+            </div>
+            <div>
+              <h3 className="font-bold text-success">Booking Confirmed</h3>
+              <p className="text-sm text-muted-foreground">
+                This booking has already been paid and confirmed — no further
+                payment is needed.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Cancelled / refunded — no payment possible */}
+        {(booking.status === "CANCELLED" || booking.status === "REFUNDED") && (
+          <div className="bg-destructive/10 border border-destructive/20 rounded-2xl p-6 mt-6 flex items-start gap-4">
+            <div className="bg-destructive/15 p-3 rounded-full shrink-0">
+              <Info className="h-6 w-6 text-destructive" />
+            </div>
+            <div>
+              <h3 className="font-bold text-destructive">
+                {booking.status === "CANCELLED"
+                  ? "Booking Cancelled"
+                  : "Booking Refunded"}
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                This booking is no longer active and cannot be paid for.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Payment section — only for pending bookings */}
+        {isPending && (
+          <div className="bg-card rounded-2xl border border-border shadow-sm mt-6 p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="flex items-center gap-3">
+                <div className="bg-accent/10 p-3 rounded-full shrink-0">
+                  <CreditCard className="h-6 w-6 text-accent" />
+                </div>
+                <div>
+                  <h3 className="font-bold">Payment Required</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Pay securely with Razorpay to confirm your booking.
+                  </p>
+                </div>
+              </div>
+              <Button
+                className="w-full sm:w-auto h-12 px-6 text-base font-medium"
+                onClick={handlePayNow}
+                disabled={isPaying}
+              >
+                {isPaying ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    {payButtonLabel()}
+                  </>
+                ) : (
+                  <>
+                    <CreditCard className="mr-2 h-5 w-5" />
+                    Pay Now
+                  </>
+                )}
+              </Button>
+            </div>
+
+            {/* Processing state — visible for the whole payment lifecycle */}
+            {payPhase !== "idle" && (
+              <div className="mt-4 bg-accent/10 border border-accent/20 rounded-lg p-4">
+                <div className="flex items-start gap-2 text-sm">
+                  <Loader2 className="h-4 w-4 mt-0.5 shrink-0 animate-spin text-accent" />
+                  <div>
+                    <p className="font-semibold text-accent">
+                      {payPhase === "verifying"
+                        ? "Verifying Payment"
+                        : payPhase === "checkout"
+                        ? "Waiting for Payment"
+                        : "Processing Payment"}
+                    </p>
+                    <p className="text-muted-foreground mt-0.5">
+                      {payPhase === "verifying"
+                        ? "Your payment is being verified and your booking confirmed. Please do not close or refresh this page."
+                        : payPhase === "checkout"
+                        ? "Complete your payment in the secure Razorpay window."
+                        : "Preparing your secure payment. This will only take a moment."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {paymentError && (
+              <div className="mt-4 bg-destructive/10 border border-destructive/20 rounded-lg p-4">
+                <div className="flex items-start gap-2 text-sm">
+                  <Info className="h-4 w-4 mt-0.5 shrink-0 text-destructive" />
+                  <div>
+                    <p className="font-semibold text-destructive">
+                      {paymentError.title}
+                    </p>
+                    <p className="text-muted-foreground mt-0.5">
+                      {paymentError.message}
+                    </p>
+                  </div>
+                </div>
+                {paymentError.action === "login" && (
+                  <Button
+                    size="sm"
+                    className="mt-3"
+                    onClick={() =>
+                      router.push(
+                        `/login?redirect=${encodeURIComponent(`/booking/${bookingId}/payment`)}`
+                      )
+                    }
+                  >
+                    Sign In
+                  </Button>
+                )}
+                {paymentError.action === "my-bookings" && (
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="mt-3"
+                    onClick={() => router.push("/customer/bookings")}
+                  >
+                    View My Bookings
+                  </Button>
+                )}
+                {paymentError.retry && (
+                  <Button
+                    size="sm"
+                    className="mt-3"
+                    onClick={handlePayNow}
+                    disabled={payPhase !== "idle"}
+                  >
+                    {payPhase !== "idle" ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Processing...
+                      </>
+                    ) : (
+                      "Try Again"
+                    )}
+                  </Button>
+                )}
+              </div>
+            )}
+
+            <p className="mt-4 text-xs text-muted-foreground flex items-center gap-1.5">
+              <ShieldCheck className="h-3.5 w-3.5 shrink-0" />
+              Payments are processed securely by Razorpay. Your card details are
+              never stored on our servers.
+            </p>
+          </div>
+        )}
+
+        {/* Success panel after payment */}
+        {ticketNumber && (
+          <div className="bg-success/10 border border-success/20 rounded-2xl p-6 mt-6 flex items-start gap-4">
+            <div className="bg-success/15 p-3 rounded-full shrink-0">
+              <Ticket className="h-6 w-6 text-success" />
+            </div>
+            <div>
+              <h3 className="font-bold text-success">
+                Payment Successful — Ticket Issued
+              </h3>
+              <p className="text-sm text-muted-foreground">
+                Ticket{" "}
+                <span className="font-mono font-semibold text-foreground">
+                  {ticketNumber}
+                </span>{" "}
+                has been issued for this booking.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Actions */}
+        <div className="flex flex-col sm:flex-row gap-4 mt-8">
+          <Button
+            className="flex-1 h-12 text-lg font-medium"
+            onClick={() => router.push("/customer/bookings")}
+          >
+            View My Bookings
+          </Button>
+          <Button
+            className="flex-1 h-12 text-lg font-medium"
+            variant="outline"
+            onClick={() => router.push("/events")}
+          >
+            Back to Events
+          </Button>
+        </div>
+
+        {booking.status === "PENDING" && (
+          <div className="mt-6 text-center text-xs text-muted-foreground">
+            <p>
+              This booking stays pending until payment is completed. Unpaid
+              seats may be released.
+            </p>
+          </div>
+        )}
+
+      </div>
+    </div>
+  );
+}
+

@@ -1,0 +1,1 @@
+D:\Ticket Booking System\Frontend\src\app\events\[id]\EventDetailClient.tsx

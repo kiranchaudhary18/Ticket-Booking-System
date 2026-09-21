@@ -1,0 +1,57 @@
+[
+    {
+        "id":  1,
+        "venue":  4,
+        "row":  "A",
+        "seat_number":  "1",
+        "seat_type":  "VIP",
+        "price":  "2500.00",
+        "is_active":  true,
+        "created_at":  "2026-09-11T18:04:09.904828Z",
+        "updated_at":  "2026-09-11T18:04:09.904828Z"
+    },
+    {
+        "id":  2,
+        "venue":  4,
+        "row":  "A",
+        "seat_number":  "2",
+        "seat_type":  "VIP",
+        "price":  "2500.00",
+        "is_active":  true,
+        "created_at":  "2026-09-11T18:04:09.904828Z",
+        "updated_at":  "2026-09-11T18:04:09.904828Z"
+    },
+    {
+        "id":  3,
+        "venue":  4,
+        "row":  "A",
+        "seat_number":  "3",
+        "seat_type":  "VIP",
+        "price":  "2500.00",
+        "is_active":  true,
+        "created_at":  "2026-09-11T18:04:09.904828Z",
+        "updated_at":  "2026-09-11T18:04:09.904828Z"
+    },
+    {
+        "id":  4,
+        "venue":  4,
+        "row":  "A",
+        "seat_number":  "4",
+        "seat_type":  "VIP",
+        "price":  "2500.00",
+        "is_active":  true,
+        "created_at":  "2026-09-11T18:04:09.904828Z",
+        "updated_at":  "2026-09-11T18:04:09.904828Z"
+    },
+    {
+        "id":  5,
+        "venue":  4,
+        "row":  "A",
+        "seat_number":  "5",
+        "seat_type":  "VIP",
+        "price":  "2500.00",
+        "is_active":  true,
+        "created_at":  "2026-09-11T18:04:09.904828Z",
+        "updated_at":  "2026-09-11T18:04:09.904828Z"
+    }
+]

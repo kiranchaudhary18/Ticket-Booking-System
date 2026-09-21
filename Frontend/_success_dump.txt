@@ -1,0 +1,308 @@
+"use client";
+
+import React, { Suspense, useEffect, useState } from "react";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useAuth } from "@/contexts/AuthContext";
+import { UserRole } from "@/types/auth";
+import { Booking } from "@/types/booking";
+import { bookingService } from "@/services/booking.service";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ErrorState } from "@/components/ui/error-state";
+import {
+  ArrowLeft,
+  Calendar,
+  CheckCircle2,
+  Clock,
+  Loader2,
+  MapPin,
+  ShieldCheck,
+  Ticket,
+} from "lucide-react";
+
+const SEAT_TYPE_LABELS: Record<string, string> = {
+  REGULAR: "Regular",
+  PREMIUM: "Premium",
+  VIP: "VIP",
+};
+
+const BOOKING_STATUS_VARIANTS: Record<
+  string,
+  "default" | "secondary" | "destructive" | "outline"
+> = {
+  CONFIRMED: "default",
+  PENDING: "secondary",
+  CANCELLED: "destructive",
+  REFUNDED: "outline",
+};
+
+const BOOKING_STATUS_LABELS: Record<string, string> = {
+  CONFIRMED: "Confirmed",
+  PENDING: "Pending",
+  CANCELLED: "Cancelled",
+  REFUNDED: "Refunded",
+};
+
+const formatDate = (dateStr: string) =>
+  new Intl.DateTimeFormat("en-US", {
+    weekday: "long",
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  }).format(new Date(dateStr));
+
+const formatTime = (timeStr: string) => timeStr.slice(0, 5);
+
+function LoadingScreen({ label }: { label: string }) {
+  return (
+    <div className="flex flex-col items-center justify-center min-h-[60vh]">
+      <Loader2 className="h-10 w-10 animate-spin text-primary/60 mb-4" />
+      <p className="text-muted-foreground">{label}</p>
+    </div>
+  );
+}
+
+function SuccessContent() {
+  const params = useParams();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const { isAuthenticated, isLoading: authLoading, user } = useAuth();
+
+  const bookingId = params.bookingId as string;
+  // The Razorpay payment id returned to the browser by Checkout and
+  // verified by the Backend. The payment SIGNATURE is deliberately
+  // never forwarded or displayed.
+  const paymentId = searchParams.get("payment_id");
+  const ticketNumber = searchParams.get("ticket");
+
+  const [booking, setBooking] = useState<Booking | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Auth redirect — preserve the success URL so the user lands back
+    // here after signing in.
+    if (!authLoading && !isAuthenticated) {
+      const currentPath = `/booking/${bookingId}/payment/success${
+        paymentId ? `?payment_id=${encodeURIComponent(paymentId)}` : ""
+      }`;
+      router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
+      return;
+    }
+
+    if (authLoading || !isAuthenticated) return;
+
+    // Only CUSTOMERs use the booking/payment flow.
+    if (user && user.role !== UserRole.CUSTOMER) {
+      router.replace(
+        user.role === UserRole.ADMIN ? "/admin/dashboard" : "/organizer/dashboard"
+      );
+      return;
+    }
+
+    const fetchBooking = async () => {
+      try {
+        setIsLoading(true);
+        setLoadError(null);
+        const data = await bookingService.getBookingDetails(bookingId);
+        setBooking(data);
+      } catch (err) {
+        console.error("Failed to load booking:", err);
+        setLoadError(
+          "We could not load this booking. It may not exist, or you may not have access to it."
+        );
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchBooking();
+  }, [bookingId, isAuthenticated, authLoading, user, router]);
+
+  // A pending booking never reached payment success — send the user
+  // back to the payment page instead of showing a misleading screen.
+  useEffect(() => {
+    if (booking && booking.status === "PENDING") {
+      router.replace(`/booking/${booking.id}/payment`);
+    }
+  }, [booking, router]);
+
+  if (authLoading || isLoading) {
+    return <LoadingScreen label="Loading your booking..." />;
+  }
+
+  if (loadError || !booking) {
+    return (
+      <div className="pt-20">
+        <ErrorState
+          title="Booking Not Found"
+          message={loadError ?? "We could not find this booking."}
+          onRetry={() => window.location.reload()}
+        />
+        <div className="flex justify-center gap-4 mt-4 mb-20">
+          <Button onClick={() => router.push("/customer/bookings")} variant="outline">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            View My Bookings
+          </Button>
+          <Button onClick={() => router.push("/events")} variant="ghost">
+            Back to Events
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  const isConfirmed = booking.status === "CONFIRMED";
+  const totalAmount = parseFloat(booking.total_amount).toFixed(2);
+
+  return (
+    <div className="min-h-screen bg-background pb-20">
+      {/* Success banner */}
+      <div className="bg-muted py-10 border-b">
+        <div className="container mx-auto px-4 md:px-6 flex flex-col items-center text-center">
+          <div className="bg-success/15 p-4 rounded-full mb-4">
+            <CheckCircle2 className="h-12 w-12 text-success" />
+          </div>
+          <h1 className="text-3xl font-bold tracking-tight mb-2">
+            Payment Successful
+          </h1>
+          <p className="text-muted-foreground text-lg max-w-md">
+            Your payment has been verified and your booking is confirmed. Your
+            seats are reserved for this show.
+          </p>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 md:px-6 pt-8 max-w-3xl">
+        <button
+          onClick={() => router.push("/customer/bookings")}
+          className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back to My Bookings
+        </button>
+
+        {/* Booking details */}
+        <div className="bg-card rounded-2xl border border-border shadow-sm p-6 md:p-8">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+            <div className="min-w-0">
+              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1">
+                Event
+              </p>
+              <h2 className="text-xl md:text-2xl font-bold tracking-tight">
+                {booking.event.title}
+              </h2>
+            </div>
+            <Badge
+              variant={BOOKING_STATUS_VARIANTS[booking.status] || "secondary"}
+              className="self-start shrink-0"
+            >
+              {BOOKING_STATUS_LABELS[booking.status] || booking.status}
+            </Badge>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5">
+            <div>
+              <p className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-muted-foreground mb-1.5">
+                <Calendar className="h-3.5 w-3.5 text-accent" />
+                Show Date
+              </p>
+              <p className="font-medium">{formatDate(booking.show.show_date)}</p>
+            </div>
+
+            <div>
+              <p className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-muted-foreground mb-1.5">
+                <Clock className="h-3.5 w-3.5 text-accent" />
+                Show Time
+              </p>
+              <p className="font-medium">
+                {formatTime(booking.show.start_time)} –{" "}
+                {formatTime(booking.show.end_time)}
+              </p>
+            </div>
+
+            <div className="sm:col-span-2">
+              <p className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-muted-foreground mb-1.5">
+                <MapPin className="h-3.5 w-3.5 text-accent" />
+                Venue
+              </p>
+              <p className="font-medium">
+                {booking.venue.name}
+                <span className="text-muted-foreground">
+                  {" "}
+                  · {booking.venue.city}, {booking.venue.state}
+                </span>
+              </p>
+            </div>
+
+            <div>
+              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-1.5">
+                Booking ID
+              </p>
+              <p className="font-mono font-semibold break-all">
+                {booking.booking_reference}
+              </p>
+            </div>
+
+            <div>
+              <p className="flex items-center gap-1.5 text-xs uppercase tracking-wider text-muted-foreground mb-1.5">
+                <CreditCard className="h-3.5 w-3.5 text-accent" />
+                Payment ID
+              </p>
+              <p className="font-mono font-semibold break-all">
+                {paymentId ?? "Not available"}
+              </p>
+            </div>
+
+            <div className="sm:col-span-2">
+              <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">
+                Seats ({booking.seats.length})
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {booking.seats.map((item) => (
+                  <span
+                    key={item.id}
+                    className="inline-flex items-baseline gap-1.5 rounded-lg border border-border bg-muted/50 px-3 py-1.5 text-sm"
+                  >
+                    <span className="font-semibold">
+                      {item.seat.row}
+                      {item.seat.seat_number}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      {SEAT_TYPE_LABELS[item.seat.seat_type] ?? item.seat.seat_type}
+                    </span>
+                    <span className="text-xs text-muted-foreground">
+                      ₹{parseFloat(item.price).toFixed(2)}
+                    </span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-border mt-6 pt-5 flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">
+              Amount Paid ({booking.seats.length}{" "}
+              {booking.seats.length === 1 ? "ticket" : "tickets"})
+            </p>
+            <p className="text-2xl md:text-3xl font-bold text-accent">
+              ₹{totalAmount}
+            </p>
+          </div>
+        </div>
+
+        /*__CHUNK3B__*/
+      </div>
+    </div>
+  );
+
+}
+
+export default function PaymentSuccessPage() {
+  return (
+    <Suspense fallback={<LoadingScreen label="Loading..." />}>
+      <SuccessContent />
+    </Suspense>
+  );
+}
+

@@ -1,0 +1,18 @@
+[
+    {
+        "id":  11,
+        "name":  "Live Concerts",
+        "description":  "Music and live band performances",
+        "is_active":  true,
+        "created_at":  "2026-09-11T17:40:46.291044Z",
+        "updated_at":  "2026-09-11T17:40:46.291044Z"
+    },
+    {
+        "id":  12,
+        "name":  "Live Concerts2",
+        "description":  "Music and live band performances",
+        "is_active":  true,
+        "created_at":  "2026-09-11T17:56:35.856173Z",
+        "updated_at":  "2026-09-11T17:56:35.856173Z"
+    }
+]

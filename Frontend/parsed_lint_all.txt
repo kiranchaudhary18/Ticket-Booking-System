@@ -1,0 +1,513 @@
+File: D:\Ticket Booking System\Frontend\src\app\admin\bookings\[id]\page.tsx
+  8:3 [WARNING] @typescript-eslint/no-unused-vars: 'Loader2' is defined but never used
+  9:3 [WARNING] @typescript-eslint/no-unused-vars: 'ShieldAlert' is defined but never used
+  17:3 [WARNING] @typescript-eslint/no-unused-vars: 'Tag' is defined but never used
+  23:52 [WARNING] @typescript-eslint/no-unused-vars: 'CardDescription' is defined but never used
+  26:10 [WARNING] @typescript-eslint/no-unused-vars: 'toast' is defined but never used
+  47:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  205:45 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\bookings\page.tsx
+  26:10 [WARNING] @typescript-eslint/no-unused-vars: 'Label' is defined but never used
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\categories\page.tsx
+  42:10 [WARNING] @typescript-eslint/no-unused-vars: 'AdminLoadingState' is defined but never used
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\dashboard\page.tsx
+  4:10 [WARNING] @typescript-eslint/no-unused-vars: 'format' is defined but never used
+  6:3 [WARNING] @typescript-eslint/no-unused-vars: 'CreditCard' is defined but never used
+  7:3 [WARNING] @typescript-eslint/no-unused-vars: 'AlertCircle' is defined but never used
+  8:3 [WARNING] @typescript-eslint/no-unused-vars: 'ArrowRight' is defined but never used
+  10:8 [WARNING] @typescript-eslint/no-unused-vars: 'Link' is defined but never used
+  14:10 [WARNING] @typescript-eslint/no-unused-vars: 'Card' is defined but never used
+  14:16 [WARNING] @typescript-eslint/no-unused-vars: 'CardContent' is defined but never used
+  14:29 [WARNING] @typescript-eslint/no-unused-vars: 'CardDescription' is defined but never used
+  14:46 [WARNING] @typescript-eslint/no-unused-vars: 'CardHeader' is defined but never used
+  14:58 [WARNING] @typescript-eslint/no-unused-vars: 'CardTitle' is defined but never used
+  14:69 [WARNING] @typescript-eslint/no-unused-vars: 'CardFooter' is defined but never used
+  15:10 [WARNING] @typescript-eslint/no-unused-vars: 'PageSkeleton' is defined but never used
+  17:10 [WARNING] @typescript-eslint/no-unused-vars: 'Badge' is defined but never used
+  29:52 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  49:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  60:9 [WARNING] @typescript-eslint/no-unused-vars: 'getStatusColor' is assigned a value but never used
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\events\[id]\page.tsx
+  9:3 [WARNING] @typescript-eslint/no-unused-vars: 'ShieldAlert' is defined but never used
+  14:3 [WARNING] @typescript-eslint/no-unused-vars: 'CheckCircle2' is defined but never used
+  15:3 [WARNING] @typescript-eslint/no-unused-vars: 'XCircle' is defined but never used
+  81:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  114:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\profile\page.tsx
+  31:7 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\profile\page.tsx:31:7
+  42:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  71:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\reports\page.tsx
+  10:3 [WARNING] @typescript-eslint/no-unused-vars: 'Calendar' is defined but never used
+  13:3 [WARNING] @typescript-eslint/no-unused-vars: 'Loader2' is defined but never used
+  60:30 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  65:29 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  82:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  91:6 [WARNING] react-hooks/exhaustive-deps: React Hook useEffect has a missing dependency: 'availableEvents.length'. Either include it or remove the dependency array
+  102:28 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\users\[id]\page.tsx
+  9:3 [WARNING] @typescript-eslint/no-unused-vars: 'ShieldAlert' is defined but never used
+  13:3 [WARNING] @typescript-eslint/no-unused-vars: 'Shield' is defined but never used
+  76:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  112:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  335:44 [ERROR] react/no-unescaped-entities: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\users\page.tsx
+  20:29 [WARNING] @typescript-eslint/no-unused-vars: 'CardDescription' is defined but never used
+
+File: D:\Ticket Booking System\Frontend\src\app\booking\[bookingId]\payment\page.tsx
+  226:50 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  227:66 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  260:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\booking\[bookingId]\payment\success\page.tsx
+  17:3 [WARNING] @typescript-eslint/no-unused-vars: 'Loader2' is defined but never used
+  19:3 [WARNING] @typescript-eslint/no-unused-vars: 'ShieldCheck' is defined but never used
+  20:3 [WARNING] @typescript-eslint/no-unused-vars: 'Ticket' is defined but never used
+  73:9 [WARNING] @typescript-eslint/no-unused-vars: 'ticketNumber' is assigned a value but never used
+  117:6 [WARNING] react-hooks/exhaustive-deps: React Hook useEffect has a missing dependency: 'paymentId'. Either include it or remove the dependency array
+  152:9 [WARNING] @typescript-eslint/no-unused-vars: 'isConfirmed' is assigned a value but never used
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\bookings\[id]\page.tsx
+  15:3 [WARNING] @typescript-eslint/no-unused-vars: 'AlertCircle' is defined but never used
+  61:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  79:7 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\bookings\[id]\page.tsx:79:7
+  81:6 [WARNING] react-hooks/exhaustive-deps: React Hook useEffect has a missing dependency: 'fetchBookingDetails'. Either include it or remove the dependency array
+  97:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\bookings\confirmation\[bookingReference]\page.tsx
+  16:3 [WARNING] @typescript-eslint/no-unused-vars: 'Loader2' is defined but never used
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\bookings\page.tsx
+  18:29 [WARNING] @typescript-eslint/no-unused-vars: 'CardDescription' is defined but never used
+  72:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  82:5 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\bookings\page.tsx:82:5
+  117:5 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\bookings\page.tsx:117:5
+  349:19 [WARNING] @next/next/no-location-assign-relative-destination: Do not use `window.location.href` to navigate to internal Next.js pages. Use `redirect()` in the render phase, or `useRouter().push()` in Client Components' event handlers instead. See: https://nextjs.org/docs/messages/no-location-assign-relative-destination
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\dashboard\page.tsx
+  5:10 [WARNING] @typescript-eslint/no-unused-vars: 'format' is defined but never used
+  9:3 [WARNING] @typescript-eslint/no-unused-vars: 'Clock' is defined but never used
+  10:3 [WARNING] @typescript-eslint/no-unused-vars: 'MapPin' is defined but never used
+  11:3 [WARNING] @typescript-eslint/no-unused-vars: 'ChevronRight' is defined but never used
+  12:3 [WARNING] @typescript-eslint/no-unused-vars: 'Activity' is defined but never used
+  20:33 [WARNING] @typescript-eslint/no-unused-vars: 'Booking' is defined but never used
+  21:29 [WARNING] @typescript-eslint/no-unused-vars: 'CardDescription' is defined but never used
+  21:69 [WARNING] @typescript-eslint/no-unused-vars: 'CardFooter' is defined but never used
+  41:23 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  73:9 [WARNING] @typescript-eslint/no-unused-vars: 'getStatusIcon' is assigned a value but never used
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\notifications\page.tsx
+  3:10 [WARNING] @typescript-eslint/no-unused-vars: 'useEffect' is defined but never used
+  3:21 [WARNING] @typescript-eslint/no-unused-vars: 'useState' is defined but never used
+  7:3 [WARNING] @typescript-eslint/no-unused-vars: 'Loader2' is defined but never used
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\profile\page.tsx
+  7:41 [WARNING] @typescript-eslint/no-unused-vars: 'UserIcon' is defined but never used
+  12:10 [WARNING] @typescript-eslint/no-unused-vars: 'CustomerProfile' is defined but never used
+  12:27 [WARNING] @typescript-eslint/no-unused-vars: 'UserProfile' is defined but never used
+  51:11 [WARNING] @typescript-eslint/no-unused-vars: 'user' is assigned a value but never used
+  74:23 [WARNING] library: Compilation Skipped: Use of incompatible
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\profile\page.tsx:74:23
+  188:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  359:40 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\tickets\[id]\page.tsx
+  12:3 [WARNING] @typescript-eslint/no-unused-vars: 'CreditCard' is defined but never used
+  19:10 [WARNING] @typescript-eslint/no-unused-vars: 'Card' is defined but never used
+  19:16 [WARNING] @typescript-eslint/no-unused-vars: 'CardContent' is defined but never used
+  19:29 [WARNING] @typescript-eslint/no-unused-vars: 'CardHeader' is defined but never used
+  19:41 [WARNING] @typescript-eslint/no-unused-vars: 'CardTitle' is defined but never used
+  44:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  211:17 [WARNING] @next/next/no-img-element: Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\tickets\page.tsx
+  4:8 [WARNING] @typescript-eslint/no-unused-vars: 'Link' is defined but never used
+  5:10 [WARNING] @typescript-eslint/no-unused-vars: 'format' is defined but never used
+  8:3 [WARNING] @typescript-eslint/no-unused-vars: 'Calendar' is defined but never used
+  9:3 [WARNING] @typescript-eslint/no-unused-vars: 'Clock' is defined but never used
+  10:3 [WARNING] @typescript-eslint/no-unused-vars: 'MapPin' is defined but never used
+  11:3 [WARNING] @typescript-eslint/no-unused-vars: 'ChevronRight' is defined but never used
+  18:29 [WARNING] @typescript-eslint/no-unused-vars: 'CardHeader' is defined but never used
+  18:41 [WARNING] @typescript-eslint/no-unused-vars: 'CardTitle' is defined but never used
+  18:52 [WARNING] @typescript-eslint/no-unused-vars: 'CardDescription' is defined but never used
+  20:10 [WARNING] @typescript-eslint/no-unused-vars: 'Badge' is defined but never used
+  43:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  53:5 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\tickets\page.tsx:53:5
+  106:13 [WARNING] @next/next/no-location-assign-relative-destination: Do not use `window.location.href` to navigate to internal Next.js pages. Use `redirect()` in the render phase, or `useRouter().push()` in Client Components' event handlers instead. See: https://nextjs.org/docs/messages/no-location-assign-relative-destination
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\wishlist\page.tsx
+  3:10 [WARNING] @typescript-eslint/no-unused-vars: 'useEffect' is defined but never used
+  4:8 [WARNING] @typescript-eslint/no-unused-vars: 'Link' is defined but never used
+  45:63 [ERROR] react/no-unescaped-entities: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`
+  80:48 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  81:42 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  104:13 [WARNING] @next/next/no-location-assign-relative-destination: Do not use `window.location.href` to navigate to internal Next.js pages. Use `redirect()` in the render phase, or `useRouter().push()` in Client Components' event handlers instead. See: https://nextjs.org/docs/messages/no-location-assign-relative-destination
+
+File: D:\Ticket Booking System\Frontend\src\app\events\EventsClient.tsx
+  9:10 [WARNING] @typescript-eslint/no-unused-vars: 'Loader2' is defined but never used
+  9:30 [WARNING] @typescript-eslint/no-unused-vars: 'AlertCircle' is defined but never used
+  44:5 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\app\events\EventsClient.tsx:44:5
+  66:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  85:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  116:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  123:5 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\app\events\EventsClient.tsx:123:5
+  128:5 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\app\events\[id]\EventDetailClient.tsx
+  22:3 [WARNING] @typescript-eslint/no-unused-vars: 'Loader2' is defined but never used
+  23:3 [WARNING] @typescript-eslint/no-unused-vars: 'AlertCircle' is defined but never used
+  59:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  100:9 [WARNING] @typescript-eslint/no-unused-vars: 'endDate' is assigned a value but never used
+
+File: D:\Ticket Booking System\Frontend\src\app\events\[id]\page.tsx
+  20:12 [WARNING] @typescript-eslint/no-unused-vars: 'error' is defined but never used
+
+File: D:\Ticket Booking System\Frontend\src\app\forbidden\page.tsx
+  36:20 [ERROR] react/no-unescaped-entities: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`
+
+File: D:\Ticket Booking System\Frontend\src\app\not-found.tsx
+  36:25 [ERROR] react/no-unescaped-entities: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`
+  36:46 [ERROR] react/no-unescaped-entities: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\bookings\[id]\page.tsx
+  20:29 [WARNING] @typescript-eslint/no-unused-vars: 'CardDescription' is defined but never used
+  42:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  203:91 [ERROR] react/no-unescaped-entities: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\bookings\page.tsx
+  60:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  76:5 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\bookings\page.tsx:76:5
+  78:6 [WARNING] react-hooks/exhaustive-deps: React Hook useEffect has a missing dependency: 'fetchBookings'. Either include it or remove the dependency array
+  128:5 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\bookings\page.tsx:128:5
+  279:81 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  307:77 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\check-in\page.tsx
+  72:10 [WARNING] @typescript-eslint/no-unused-vars: 'errorMessage' is defined but never used
+  109:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  135:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\dashboard\page.tsx
+  6:44 [WARNING] @typescript-eslint/no-unused-vars: 'Ticket' is defined but never used
+  6:52 [WARNING] @typescript-eslint/no-unused-vars: 'Loader2' is defined but never used
+  6:61 [WARNING] @typescript-eslint/no-unused-vars: 'AlertCircle' is defined but never used
+  24:40 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  44:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  60:7 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\dashboard\page.tsx:60:7
+  62:6 [WARNING] react-hooks/exhaustive-deps: React Hook useEffect has a missing dependency: 'fetchDashboardData'. Either include it or remove the dependency array
+  83:9 [WARNING] @typescript-eslint/no-unused-vars: 'upcomingEvents' is assigned a value but never used
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\events\[id]\edit\page.tsx
+  17:46 [WARNING] @typescript-eslint/no-unused-vars: 'AlertCircle' is defined but never used
+  67:48 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  68:40 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  120:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  132:6 [WARNING] react-hooks/exhaustive-deps: React Hook useEffect has a missing dependency: 'loadData'. Either include it or remove the dependency array
+  136:20 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  172:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  255:94 [WARNING] library: Compilation Skipped: Use of incompatible
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\events\[id]\page.tsx
+  10:10 [WARNING] @typescript-eslint/no-unused-vars: 'Event' is defined but never used
+  12:10 [WARNING] @typescript-eslint/no-unused-vars: 'EmptyState' is defined but never used
+  39:38 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  57:38 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  58:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  80:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  202:145 [ERROR] react/no-unescaped-entities: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`
+  202:159 [ERROR] react/no-unescaped-entities: `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\events\[id]\shows\page.tsx
+  15:29 [WARNING] @typescript-eslint/no-unused-vars: 'CardHeader' is defined but never used
+  15:41 [WARNING] @typescript-eslint/no-unused-vars: 'CardTitle' is defined but never used
+  15:52 [WARNING] @typescript-eslint/no-unused-vars: 'CardDescription' is defined but never used
+  15:69 [WARNING] @typescript-eslint/no-unused-vars: 'CardFooter' is defined but never used
+  48:9 [WARNING] @typescript-eslint/no-unused-vars: 'router' is assigned a value but never used
+  108:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  118:7 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\events\[id]\shows\page.tsx:118:7
+  120:6 [WARNING] react-hooks/exhaustive-deps: React Hook useEffect has a missing dependency: 'fetchShowsData'. Either include it or remove the dependency array
+  140:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  176:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  194:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  204:34 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\events\create\page.tsx
+  17:39 [WARNING] @typescript-eslint/no-unused-vars: 'ImageIcon' is defined but never used
+  20:10 [WARNING] @typescript-eslint/no-unused-vars: 'EventStatus' is defined but never used
+  64:48 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  65:40 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  113:20 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  143:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  213:94 [WARNING] library: Compilation Skipped: Use of incompatible
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\events\create\page.tsx:213:94
+  328:44 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\events\page.tsx
+  9:10 [WARNING] @typescript-eslint/no-unused-vars: 'Loader2' is defined but never used
+  9:31 [WARNING] @typescript-eslint/no-unused-vars: 'MapPin' is defined but never used
+  9:94 [WARNING] @typescript-eslint/no-unused-vars: 'AlertCircle' is defined but never used
+  28:40 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  29:48 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  45:27 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  72:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  87:6 [WARNING] react-hooks/exhaustive-deps: React Hook useEffect has a missing dependency: 'fetchEventsData'. Either include it or remove the dependency array
+  98:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  171:37 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  195:13 [WARNING] @next/next/no-location-assign-relative-destination: Do not use `window.location.href` to navigate to internal Next.js pages. Use `redirect()` in the render phase, or `useRouter().push()` in Client Components' event handlers instead. See: https://nextjs.org/docs/messages/no-location-assign-relative-destination
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\profile\page.tsx
+  33:7 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\profile\page.tsx:33:7
+  129:33 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  168:33 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  178:33 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  191:35 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  206:35 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\shows\[id]\edit\page.tsx
+  74:20 [WARNING] library: Compilation Skipped: Use of incompatible
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\shows\[id]\edit\page.tsx:74:20
+  107:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  118:35 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  137:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\shows\[id]\seats\page.tsx
+  12:10 [WARNING] @typescript-eslint/no-unused-vars: 'useToast' is defined but never used
+  13:10 [WARNING] @typescript-eslint/no-unused-vars: 'Loader2' is defined but never used
+  13:30 [WARNING] @typescript-eslint/no-unused-vars: 'AlertCircle' is defined but never used
+  13:71 [WARNING] @typescript-eslint/no-unused-vars: 'Grid3X3' is defined but never used
+  82:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\shows\create\page.tsx
+  25:8 [WARNING] @typescript-eslint/no-unused-vars: 'Link' is defined but never used
+  72:27 [WARNING] library: Compilation Skipped: Use of incompatible
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\shows\create\page.tsx:72:27
+  123:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\venues\[id]\edit\page.tsx
+  23:30 [WARNING] @typescript-eslint/no-unused-vars: 'AlertCircle' is defined but never used
+  25:10 [WARNING] @typescript-eslint/no-unused-vars: 'Venue' is defined but never used
+  41:6 [WARNING] @typescript-eslint/no-unused-vars: 'FormValues' is defined but never used
+  78:21 [WARNING] library: Compilation Skipped: Use of incompatible
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\venues\[id]\edit\page.tsx:78:21
+  121:35 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  135:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  225:40 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\venues\[id]\page.tsx
+  9:52 [WARNING] @typescript-eslint/no-unused-vars: 'CardDescription' is defined but never used
+  13:10 [WARNING] @typescript-eslint/no-unused-vars: 'Loader2' is defined but never used
+  73:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  253:21 [WARNING] @next/next/no-location-assign-relative-destination: Do not use `window.location.href` to navigate to internal Next.js pages. Use `redirect()` in the render phase, or `useRouter().push()` in Client Components' event handlers instead. See: https://nextjs.org/docs/messages/no-location-assign-relative-destination
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\venues\[id]\seats\page.tsx
+  25:30 [WARNING] @typescript-eslint/no-unused-vars: 'AlertCircle' is defined but never used
+  110:20 [WARNING] library: Compilation Skipped: Use of incompatible
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\venues\[id]\seats\page.tsx:110:20
+  159:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  171:6 [WARNING] react-hooks/exhaustive-deps: React Hook useEffect has a missing dependency: 'fetchData'. Either include it or remove the dependency array
+  203:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  227:42 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  249:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  509:70 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  557:74 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\venues\create\page.tsx
+  24:10 [WARNING] @typescript-eslint/no-unused-vars: 'VenueType' is defined but never used
+  65:21 [WARNING] library: Compilation Skipped: Use of incompatible
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\venues\create\page.tsx:65:21
+  81:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  154:40 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\venues\page.tsx
+  9:10 [WARNING] @typescript-eslint/no-unused-vars: 'Loader2' is defined but never used
+  9:31 [WARNING] @typescript-eslint/no-unused-vars: 'MapPin' is defined but never used
+  9:39 [WARNING] @typescript-eslint/no-unused-vars: 'Users' is defined but never used
+  9:63 [WARNING] @typescript-eslint/no-unused-vars: 'AlertCircle' is defined but never used
+  18:11 [WARNING] @typescript-eslint/no-unused-vars: 'toast' is assigned a value but never used
+  35:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  45:7 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\venues\page.tsx:45:7
+  47:6 [WARNING] react-hooks/exhaustive-deps: React Hook useEffect has a missing dependency: 'fetchVenuesData'. Either include it or remove the dependency array
+  87:13 [WARNING] @next/next/no-location-assign-relative-destination: Do not use `window.location.href` to navigate to internal Next.js pages. Use `redirect()` in the render phase, or `useRouter().push()` in Client Components' event handlers instead. See: https://nextjs.org/docs/messages/no-location-assign-relative-destination
+
+File: D:\Ticket Booking System\Frontend\src\components\admin\AdminBookingOverview.tsx
+  4:34 [WARNING] @typescript-eslint/no-unused-vars: 'CheckCircle2' is defined but never used
+  4:48 [WARNING] @typescript-eslint/no-unused-vars: 'Clock' is defined but never used
+  4:55 [WARNING] @typescript-eslint/no-unused-vars: 'XCircle' is defined but never used
+
+File: D:\Ticket Booking System\Frontend\src\components\admin\AdminEventOverview.tsx
+  4:36 [WARNING] @typescript-eslint/no-unused-vars: 'CheckCircle2' is defined but never used
+  4:50 [WARNING] @typescript-eslint/no-unused-vars: 'AlertCircle' is defined but never used
+
+File: D:\Ticket Booking System\Frontend\src\components\admin\AdminLoadingState.tsx
+  39:95 [ERROR] render: Error: Cannot call impure function during
+
+File: D:\Ticket Booking System\Frontend\src\components\admin\AdminRevenueOverview.tsx
+  15:18 [WARNING] @typescript-eslint/no-unused-vars: 'parseISO' is defined but never used
+  16:10 [WARNING] @typescript-eslint/no-unused-vars: 'IndianRupee' is defined but never used
+  16:48 [WARNING] @typescript-eslint/no-unused-vars: 'Calendar' is defined but never used
+  62:54 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  67:32 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  135:42 [ERROR] render: Error: Cannot create components during
+
+File: D:\Ticket Booking System\Frontend\src\components\admin\CategoryForm.tsx
+  57:20 [WARNING] library: Compilation Skipped: Use of incompatible
+
+File: D:\Ticket Booking System\Frontend\src\components\admin\CategoryForm.tsx:57:20
+  72:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\components\admin\charts\AdminBookingStatusChart.tsx
+  69:38 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\components\admin\charts\AdminEventRevenueChart.tsx
+  70:38 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  70:49 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\components\admin\charts\AdminMonthlyRevenueChart.tsx
+  86:38 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\components\admin\charts\AdminPaymentStatusChart.tsx
+  69:38 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\components\admin\charts\AdminTicketStatusChart.tsx
+  69:38 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\components\auth\LoginForm.tsx
+  80:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\components\auth\RegisterForm.tsx
+  68:24 [WARNING] library: Compilation Skipped: Use of incompatible
+
+File: D:\Ticket Booking System\Frontend\src\components\auth\RegisterForm.tsx:68:24
+  77:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  190:34 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\components\dashboard\UpcomingBookingCard.tsx
+  29:20 [ERROR] react/no-unescaped-entities: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`
+
+File: D:\Ticket Booking System\Frontend\src\components\events\EventCard.tsx
+  4:28 [WARNING] @typescript-eslint/no-unused-vars: 'Tag' is defined but never used
+
+File: D:\Ticket Booking System\Frontend\src\components\layout\OrganizerSidebar.tsx
+  16:3 [WARNING] @typescript-eslint/no-unused-vars: 'PlusCircle' is defined but never used
+
+File: D:\Ticket Booking System\Frontend\src\components\notifications\NotificationDropdown.tsx
+  3:20 [WARNING] @typescript-eslint/no-unused-vars: 'useEffect' is defined but never used
+  5:52 [WARNING] @typescript-eslint/no-unused-vars: 'Clock' is defined but never used
+  6:8 [WARNING] @typescript-eslint/no-unused-vars: 'Link' is defined but never used
+
+File: D:\Ticket Booking System\Frontend\src\components\organizer\OrganizerRecentBookings.tsx
+  27:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\components\organizer\OrganizerRevenueOverview.tsx
+  11:20 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  12:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  32:21 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\components\tickets\TicketCard.tsx
+  2:8 [WARNING] @typescript-eslint/no-unused-vars: 'Link' is defined but never used
+  125:13 [WARNING] @next/next/no-location-assign-relative-destination: Do not use `window.location.href` to navigate to internal Next.js pages. Use `redirect()` in the render phase, or `useRouter().push()` in Client Components' event handlers instead. See: https://nextjs.org/docs/messages/no-location-assign-relative-destination
+
+File: D:\Ticket Booking System\Frontend\src\contexts\AuthContext.tsx
+  45:5 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\contexts\AuthContext.tsx:45:5
+  47:40 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\contexts\NotificationContext.tsx
+  36:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  46:7 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\contexts\NotificationContext.tsx:46:7
+  66:11 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\contexts\OrganizerProfileContext.tsx
+  41:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  53:5 [ERROR] renders: Error: Calling setState synchronously within an effect can trigger cascading
+
+File: D:\Ticket Booking System\Frontend\src\contexts\OrganizerProfileContext.tsx:53:5
+  54:6 [WARNING] react-hooks/exhaustive-deps: React Hook useEffect has a missing dependency: 'fetchProfileData'. Either include it or remove the dependency array
+  68:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  90:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\contexts\ProfileContext.tsx
+  38:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\contexts\WishlistContext.tsx
+  46:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  74:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  105:19 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\hooks\use-toast.ts
+  1:10 [WARNING] @typescript-eslint/no-unused-vars: 'useState' is defined but never used
+  5:20 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\services\admin.service.ts
+  17:10 [WARNING] @typescript-eslint/no-unused-vars: 'Booking' is defined but never used
+
+File: D:\Ticket Booking System\Frontend\src\services\auth.service.ts
+  67:30 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\services\booking.service.ts
+  20:29 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  59:32 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\services\organizer.service.ts
+  224:33 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  232:31 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  232:45 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\services\ticket.service.ts
+  11:30 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\services\wishlist.service.ts
+  14:26 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  15:22 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+
+File: D:\Ticket Booking System\Frontend\src\types\admin.ts
+  1:10 [WARNING] @typescript-eslint/no-unused-vars: 'User' is defined but never used
+  3:10 [WARNING] @typescript-eslint/no-unused-vars: 'Booking' is defined but never used
+  135:9 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  136:10 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+  137:10 [ERROR] @typescript-eslint/no-explicit-any: Unexpected any. Specify a different type
+

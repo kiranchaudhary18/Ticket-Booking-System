@@ -1,0 +1,42 @@
+[
+    {
+        "id":  1,
+        "row":  "A",
+        "seat_number":  "1",
+        "seat_type":  "VIP",
+        "price":  "2500.00",
+        "status":  "BOOKED"
+    },
+    {
+        "id":  2,
+        "row":  "A",
+        "seat_number":  "2",
+        "seat_type":  "VIP",
+        "price":  "2500.00",
+        "status":  "BOOKED"
+    },
+    {
+        "id":  3,
+        "row":  "A",
+        "seat_number":  "3",
+        "seat_type":  "VIP",
+        "price":  "2500.00",
+        "status":  "AVAILABLE"
+    },
+    {
+        "id":  4,
+        "row":  "A",
+        "seat_number":  "4",
+        "seat_type":  "VIP",
+        "price":  "2500.00",
+        "status":  "AVAILABLE"
+    },
+    {
+        "id":  5,
+        "row":  "A",
+        "seat_number":  "5",
+        "seat_type":  "VIP",
+        "price":  "2500.00",
+        "status":  "AVAILABLE"
+    }
+]

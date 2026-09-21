@@ -1,0 +1,186 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-heading: var(--font-sans);
+  
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-highlight: var(--highlight);
+  --color-highlight-foreground: var(--highlight-foreground);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+@layer base {
+  :root {
+    /* Warm off-white canvas with deep navy typography and indigo actions. */
+    --background: #F8F7F4;
+    --foreground: #0F1B2D;
+    --card: #FFFFFF;
+    --card-foreground: #0F1B2D;
+    --popover: #FFFFFF;
+    --popover-foreground: #0F1B2D;
+    --primary: #5B5CE2;
+    --primary-foreground: #FFFFFF;
+    --secondary: #F8F7F4;
+    --secondary-foreground: #111827;
+    --muted: #F8F7F4;
+    --muted-foreground: #5B6B82;
+    --accent: #C9A86A;
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #10B981;
+    --success-foreground: #FFFFFF;
+    --highlight: #F59E0B;
+    --highlight-foreground: #FFFFFF;
+    --border: #E8E4DB;
+    --input: #E8E4DB;
+    --ring: #5B5CE2;
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: #0B0F19;
+    --foreground: #F8FAFC;
+    --card: #0F172A;
+    --card-foreground: #F8FAFC;
+    --popover: #0F172A;
+    --popover-foreground: #F8FAFC;
+    --primary: #FFFFFF;
+    --primary-foreground: #0F172A;
+    --secondary: #1E293B;
+    --secondary-foreground: #F8FAFC;
+    --muted: #1E293B;
+    --muted-foreground: #94A3B8;
+    --accent: #6366F1;
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --success: #10B981;
+    --success-foreground: #FFFFFF;
+    --highlight: #F59E0B;
+    --highlight-foreground: #FFFFFF;
+    --border: #334155;
+    --input: #334155;
+    --ring: #6366F1;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    /* Anchored marketing sections (e.g. /#about) glide into place. */
+    scroll-behavior: smooth;
+  }
+  [id] {
+    /* Sticky navbar clearance for in-page anchors. */
+    scroll-margin-top: 6rem;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-accent/20 selection:text-accent-foreground;
+    scrollbar-width: thin; /* Firefox support */
+    scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent; /* Firefox support */
+  }
+
+  /* Focus states */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background transition-shadow duration-200;
+  }
+
+  /* Custom Scrollbar for Chrome/Edge/Safari */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted-foreground/30 rounded-full hover:bg-muted-foreground/50 transition-colors;
+  }
+}
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  }
+  .shadow-elevated {
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  }
+  /* Wide, low-opacity shadows used by the editorial hero artwork. */
+  .shadow-photo {
+    box-shadow:
+      0 32px 70px -32px rgba(15, 27, 45, 0.35),
+      0 10px 26px -18px rgba(15, 27, 45, 0.18);
+  }
+  .shadow-float {
+    box-shadow:
+      0 22px 45px -24px rgba(15, 27, 45, 0.28),
+      0 6px 16px -10px rgba(15, 27, 45, 0.12);
+  }
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}

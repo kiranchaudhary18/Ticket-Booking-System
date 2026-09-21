@@ -1,0 +1,224 @@
+File: D:\Ticket Booking System\Frontend\src\app\admin\bookings\[id]\page.tsx
+  Line 8: Loader2
+  Line 9: ShieldAlert
+  Line 17: Tag
+  Line 23: CardDescription
+  Line 26: toast
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\bookings\page.tsx
+  Line 26: Label
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\categories\page.tsx
+  Line 42: AdminLoadingState
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\dashboard\page.tsx
+  Line 4: format
+  Line 6: CreditCard
+  Line 7: AlertCircle
+  Line 8: ArrowRight
+  Line 10: Link
+  Line 14: Card
+  Line 14: CardContent
+  Line 14: CardDescription
+  Line 14: CardHeader
+  Line 14: CardTitle
+  Line 14: CardFooter
+  Line 15: PageSkeleton
+  Line 17: Badge
+  Line 60: getStatusColor
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\events\[id]\page.tsx
+  Line 9: ShieldAlert
+  Line 14: CheckCircle2
+  Line 15: XCircle
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\reports\page.tsx
+  Line 10: Calendar
+  Line 13: Loader2
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\users\[id]\page.tsx
+  Line 9: ShieldAlert
+  Line 13: Shield
+
+File: D:\Ticket Booking System\Frontend\src\app\admin\users\page.tsx
+  Line 20: CardDescription
+
+File: D:\Ticket Booking System\Frontend\src\app\booking\[bookingId]\payment\success\page.tsx
+  Line 17: Loader2
+  Line 19: ShieldCheck
+  Line 20: Ticket
+  Line 73: ticketNumber
+  Line 152: isConfirmed
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\bookings\[id]\page.tsx
+  Line 15: AlertCircle
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\bookings\confirmation\[bookingReference]\page.tsx
+  Line 16: Loader2
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\bookings\page.tsx
+  Line 18: CardDescription
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\dashboard\page.tsx
+  Line 5: format
+  Line 9: Clock
+  Line 10: MapPin
+  Line 11: ChevronRight
+  Line 12: Activity
+  Line 20: Booking
+  Line 21: CardDescription
+  Line 21: CardFooter
+  Line 73: getStatusIcon
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\notifications\page.tsx
+  Line 3: useEffect
+  Line 3: useState
+  Line 7: Loader2
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\profile\page.tsx
+  Line 7: UserIcon
+  Line 12: CustomerProfile
+  Line 12: UserProfile
+  Line 51: user
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\tickets\[id]\page.tsx
+  Line 12: CreditCard
+  Line 19: Card
+  Line 19: CardContent
+  Line 19: CardHeader
+  Line 19: CardTitle
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\tickets\page.tsx
+  Line 4: Link
+  Line 5: format
+  Line 8: Calendar
+  Line 9: Clock
+  Line 10: MapPin
+  Line 11: ChevronRight
+  Line 18: CardHeader
+  Line 18: CardTitle
+  Line 18: CardDescription
+  Line 20: Badge
+
+File: D:\Ticket Booking System\Frontend\src\app\customer\wishlist\page.tsx
+  Line 3: useEffect
+  Line 4: Link
+
+File: D:\Ticket Booking System\Frontend\src\app\events\EventsClient.tsx
+  Line 9: Loader2
+  Line 9: AlertCircle
+
+File: D:\Ticket Booking System\Frontend\src\app\events\[id]\EventDetailClient.tsx
+  Line 22: Loader2
+  Line 23: AlertCircle
+  Line 100: endDate
+
+File: D:\Ticket Booking System\Frontend\src\app\events\[id]\page.tsx
+  Line 20: error
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\bookings\[id]\page.tsx
+  Line 20: CardDescription
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\check-in\page.tsx
+  Line 72: errorMessage
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\dashboard\page.tsx
+  Line 6: Ticket
+  Line 6: Loader2
+  Line 6: AlertCircle
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\dashboard\page.tsx:60:7
+  Line 83: upcomingEvents
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\events\[id]\edit\page.tsx
+  Line 17: AlertCircle
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\events\[id]\page.tsx
+  Line 10: Event
+  Line 12: EmptyState
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\events\[id]\shows\page.tsx
+  Line 15: CardHeader
+  Line 15: CardTitle
+  Line 15: CardDescription
+  Line 15: CardFooter
+  Line 48: router
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\events\create\page.tsx
+  Line 17: ImageIcon
+  Line 20: EventStatus
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\events\page.tsx
+  Line 9: Loader2
+  Line 9: MapPin
+  Line 9: AlertCircle
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\shows\[id]\seats\page.tsx
+  Line 12: useToast
+  Line 13: Loader2
+  Line 13: AlertCircle
+  Line 13: Grid3X3
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\shows\create\page.tsx
+  Line 25: Link
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\venues\[id]\edit\page.tsx
+  Line 23: AlertCircle
+  Line 25: Venue
+  Line 41: FormValues
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\venues\[id]\page.tsx
+  Line 9: CardDescription
+  Line 13: Loader2
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\venues\[id]\seats\page.tsx
+  Line 25: AlertCircle
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\venues\create\page.tsx
+  Line 24: VenueType
+
+File: D:\Ticket Booking System\Frontend\src\app\organizer\venues\page.tsx
+  Line 9: Loader2
+  Line 9: MapPin
+  Line 9: Users
+  Line 9: AlertCircle
+  Line 18: toast
+
+File: D:\Ticket Booking System\Frontend\src\components\admin\AdminBookingOverview.tsx
+  Line 4: CheckCircle2
+  Line 4: Clock
+  Line 4: XCircle
+
+File: D:\Ticket Booking System\Frontend\src\components\admin\AdminEventOverview.tsx
+  Line 4: CheckCircle2
+  Line 4: AlertCircle
+
+File: D:\Ticket Booking System\Frontend\src\components\admin\AdminRevenueOverview.tsx
+  Line 15: parseISO
+  Line 16: IndianRupee
+  Line 16: Calendar
+
+File: D:\Ticket Booking System\Frontend\src\components\events\EventCard.tsx
+  Line 4: Tag
+
+File: D:\Ticket Booking System\Frontend\src\components\layout\OrganizerSidebar.tsx
+  Line 16: PlusCircle
+
+File: D:\Ticket Booking System\Frontend\src\components\notifications\NotificationDropdown.tsx
+  Line 3: useEffect
+  Line 5: Clock
+  Line 6: Link
+
+File: D:\Ticket Booking System\Frontend\src\components\tickets\TicketCard.tsx
+  Line 2: Link
+
+File: D:\Ticket Booking System\Frontend\src\hooks\use-toast.ts
+  Line 1: useState
+
+File: D:\Ticket Booking System\Frontend\src\services\admin.service.ts
+  Line 17: Booking
+
+File: D:\Ticket Booking System\Frontend\src\types\admin.ts
+  Line 1: User
+  Line 3: Booking
+
