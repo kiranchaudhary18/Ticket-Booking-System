@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Ticket is Confirmed</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #F8F7F4;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #0B1020;
+            -webkit-font-smoothing: antialiased;
+        }
+        .email-wrapper {
+            width: 100%;
+            background-color: #F8F7F4;
+            padding: 40px 0;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #E7E5E0;
+            box-shadow: 0 4px 6px rgba(11, 16, 32, 0.05);
+        }
+        .header {
+            background-color: #0B1020;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        .logo {
+            color: #FFFFFF;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin: 0;
+        }
+        .header-subtext {
+            color: #A0A5B5;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+            margin-bottom: 0;
+        }
+        .content {
+            padding: 40px;
+        }
+        .greeting {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            margin-top: 0;
+        }
+        .intro-text {
+            color: #667085;
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 30px;
+            margin-top: 0;
+        }
+        .status-badge {
+            display: inline-block;
+            background-color: #E8F5E9;
+            color: #2E7D32;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+        .section-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #667085;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            margin-top: 0;
+        }
+        .card {
+            background-color: #F8F7F4;
+            border: 1px solid #E7E5E0;
+            border-radius: 8px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        .event-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #0B1020;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+        .details-grid {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .details-grid td {
+            padding-bottom: 16px;
+            vertical-align: top;
+        }
+        .details-grid td.label {
+            color: #667085;
+            font-size: 13px;
+            width: 40%;
+            padding-right: 16px;
+        }
+        .details-grid td.value {
+            color: #0B1020;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .highlight-value {
+            color: #5B5CE2;
+            font-weight: 700;
+        }
+        .attachment-note {
+            background-color: #F0F0FF;
+            border-left: 4px solid #5B5CE2;
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 30px;
+        }
+        .attachment-note h4 {
+            margin: 0 0 8px 0;
+            color: #0B1020;
+            font-size: 15px;
+        }
+        .attachment-note p {
+            margin: 0;
+            color: #667085;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .important-section {
+            border-top: 1px solid #E7E5E0;
+            padding-top: 30px;
+            margin-bottom: 10px;
+        }
+        .important-section h4 {
+            margin: 0 0 12px 0;
+            color: #0B1020;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .important-section p {
+            margin: 0 0 8px 0;
+            color: #667085;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        .footer {
+            background-color: #F8F7F4;
+            padding: 30px 40px;
+            text-align: center;
+            border-top: 1px solid #E7E5E0;
+        }
+        .footer p {
+            color: #667085;
+            font-size: 14px;
+            margin: 0 0 8px 0;
+        }
+        .footer a {
+            color: #5B5CE2;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        @media only screen and (max-width: 600px) {
+            .email-wrapper { padding: 20px 10px; }
+            .content, .header, .footer { padding: 30px 20px; }
+            .details-grid td { display: block; width: 100%; }
+            .details-grid td.label { padding-bottom: 4px; }
+            .details-grid td.value { padding-bottom: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-wrapper">
+        <div class="email-container">
+            <!-- Header -->
+            <div class="header">
+                <h1 class="logo">TicketMaster</h1>
+                <p class="header-subtext">Official Ticket Confirmation</p>
+            </div>
+            
+            <!-- Content -->
+            <div class="content">
+                <div class="status-badge">CONFIRMED</div>
+                
+                <h2 class="greeting">
+                    Hi {% if booking.customer.first_name and booking.customer.first_name.strip %}{{ booking.customer.first_name }} {{ booking.customer.last_name }}{% else %}there{% endif %},
+                </h2>
+                
+                <p class="intro-text">
+                    Your booking has been successfully confirmed.<br>
+                    Your official e-ticket is attached to this email.
+                </p>
+                
+                <!-- Event Details -->
+                <div class="card">
+                    <h3 class="section-title">Event Details</h3>
+                    <h4 class="event-title">{{ event.title }}</h4>
+                    <table class="details-grid">
+                        {% if category_name %}
+                        <tr>
+                            <td class="label">Category</td>
+                            <td class="value">{{ category_name }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td class="label">Date</td>
+                            <td class="value">{{ show_date }}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Time</td>
+                            <td class="value">{{ show_time }}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Venue</td>
+                            <td class="value">{{ venue_name }}</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <!-- Ticket Details -->
+                <div class="card">
+                    <h3 class="section-title">Ticket Details</h3>
+                    <table class="details-grid">
+                        <tr>
+                            <td class="label">Ticket Number</td>
+                            <td class="value highlight-value">{{ ticket.ticket_number }}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Booking Reference</td>
+                            <td class="value highlight-value">{{ booking.booking_reference }}</td>
+                        </tr>
+                        {% if seat_str %}
+                        <tr>
+                            <td class="label">Seat(s)</td>
+                            <td class="value">{{ seat_str }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <td class="label">Total Amount</td>
+                            <td class="value">₹{{ booking.total_amount }}</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Booking Status</td>
+                            <td class="value" style="color: #2E7D32; font-weight: 700;">CONFIRMED</td>
+                        </tr>
+                    </table>
+                </div>
+                
+                <!-- Attachment Notice -->
+                <div class="attachment-note">
+                    <h4>Your E-Ticket</h4>
+                    <p>Your official TicketMaster e-ticket is attached to this email as a PDF.</p>
+                </div>
+                
+                <!-- Important Info -->
+                <div class="important-section">
+                    <h4>Important</h4>
+                    <p>• Please keep your e-ticket available for entry.</p>
+                    <p>• Show the QR code on your ticket at the venue for verification.</p>
+                </div>
+            </div>
+            
+            <!-- Footer -->
+            <div class="footer">
+                <p>Thank you for choosing TicketMaster.</p>
+                <p>Need help with your booking? <a href="#">TicketMaster Support</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
