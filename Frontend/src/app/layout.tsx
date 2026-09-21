@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ticket Booking System",
+  title: "TicketMaster - Book Event Tickets",
   description: "A professional platform for booking events and managing tickets.",
 };
 
